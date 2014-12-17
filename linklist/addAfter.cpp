@@ -14,18 +14,24 @@ struct Number
     tt[i-1].nextaddr=tt+(i+1);
 }
 */
-void add(Number*tt, int value)
+void addAfter(Number*tt, int value)
 {
+    Number* curr;
+    while(tt)
+    {
+        curr=tt;
+        tt=tt->nextaddr;    
+    }
+    
     Number* temp= new Number;
     temp->data=value;
     temp->nextaddr=NULL;
-    tt->nextaddr=temp;
+    curr->nextaddr=temp;
 }
 
-void print(Number* tt)
+void print(Number* curr)
 {
-      Number* curr=tt;
-      for(int i=0;curr;i++)
+      while(curr)
         {
             cout<<curr->data<<endl;
             curr=curr->nextaddr;
@@ -37,9 +43,11 @@ int main ()
    Number test;
    test.data=8;
    test.nextaddr=NULL;
-   add(&test,10);
+   addAfter(&test,10);
+   addAfter(&test,5);
+   addAfter(&test,20);
    print(&test);
    //deletedata(test,3);
-   //print(test);
+   //print(test);a
    return 0;
 }
