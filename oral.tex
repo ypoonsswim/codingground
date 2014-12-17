@@ -1,0 +1,962 @@
+\documentclass[landscape,dvips,a4]{seminar}
+\usepackage[english]{babel}
+\usepackage[slides,chinese]{research11}
+%\usepackage[retainorgcmds]{IEEEtrantools}
+\renewcommand{\myfooter}{}
+\begin{document}
+\sffamily
+
+%%%slide1
+\begin{slide}
+  \begin{center}
+    %\mbox{}    
+    \vspace{-0.3cm}
+    \hspace{-0.3cm}
+    \begin{minipage}{0.18\textwidth}
+      \includegraphics[height=1.75cm]{NCTU_Logo.eps}
+    \end{minipage} 
+    \begin{minipage}{0.28\textwidth}
+      \flushleft 
+      National Chiao Tung University Taiwan
+
+    \end{minipage} 
+    \hfill
+    \begin{minipage}{0.25\textwidth}
+      \flushright
+      Institute of Communications Engineering
+    \end{minipage} 
+    \begin{minipage}{0.23\textwidth}
+    \hfill 
+      \includegraphics[height=1.4cm]{cm_logo.eps}
+    \end{minipage} 
+
+
+    \vs{2}
+    Date : \today\\[5mm]
+    \LARGE
+    \textbf{SIMO Fading Channel\\ with Memory and Feedback}
+    
+    \normalsize
+    \vs{2}
+    \cjktexta{郭沅竹}
+
+    \vs{3}
+     Advisor: Prof. Stefan M. Moser
+    \vs{1}
+  \end{center}
+  \setlength{\unitlength}{0.1mm}
+  \begin{picture}(0,0)
+  \end{picture}
+\end{slide}
+% The asymptotic channel capacity of a general noncoherent regular
+%   single-input multiple-output fading channel with memory and with
+%   feedback is investigated. 
+% Talk about outline
+% Before we have fading with memory, now we add feedback
+
+%%%slide2 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Motivation}
+  \end{center}
+ \vspace{3mm}
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{SIMO2.eps}
+   \caption{SIMO}
+   \label{fig:SIMO}
+ \end{figure}
+   \begin{itemize}
+     \item SIMO: {\b{single-input multiple-output}}
+   \end{itemize}
+\vs{2}
+\end{slide}
+% graph: mobile v.s. basestation
+% Fading channel missing
+% Wireless
+% multipath, so fading
+%% "Now" we have basic picture, "next" we give more detail about model
+
+
+%%%slide2 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Motivation}
+  \end{center}
+ \vspace{3mm}
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{SIMO3.eps}
+   \caption{SIMO}
+   \label{fig:SIMO}
+ \end{figure}
+
+\vs{2}
+\end{slide}
+
+
+
+%%%slide4 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Channel Model}
+  \end{center}
+ \vspace{3mm}
+\begin{figure*}[t]
+\centering
+\psfrag{M}{$M$}
+\psfrag{Mh}{$\hat{M}$}
+\psfrag{trans}{Tx}
+\psfrag{recei}{Rx}
+\psfrag{delay}[cc][cc]{delay}
+\psfrag{X}{$X_k$}
+\psfrag{Y1}{{$Y_k^{(1)}$}}
+\psfrag{Yn}{{$Y_k^{(\nr)}$}}
+\psfrag{H1}{{$H_k^{(1)}$}}
+\psfrag{Hn}{{$H_k^{(\nr)}$}}
+\psfrag{Z1}{{$Z_k^{(1)}$}}
+\psfrag{Zn}{{$Z_k^{(\nr)}$}}
+\psfrag{Fk}{$\vect{F}_k$}
+\psfrag{Fk1}{$\vect{F}_{k-1}$}
+\includegraphics[width=0.84\textwidth]{simofeedback.eps}
+\caption{Channel Model}
+\label{fig:simofeedback}
+\end{figure*}
+
+   \begin{itemize}
+   \item Noncoherent
+   \item {\b{Feedback}}
+     \begin{itemize}
+  \item noisefree
+       \item causal: $\vect{F}_k=\vect{Y}_1^{k-1}$
+     \end{itemize}
+   \end{itemize}
+\vs{2}
+\end{slide}
+% k: time step
+% Two kind of noise: multiplicative noise H and additive noise N
+% Noncoherent: we allow measuring channel, but with cost, ex: need
+% more power to do that
+% Noiseless, which means the link has infinite capacity, and allows
+% the receiver to send everything it knows back to the transmitter. 
+% noiseless feedback is unrealistic but it is an upper bound to all
+% the situations! we know it is too optimistic
+% feedback can only help
+%% Mathematical model, more detail about H and Z, how this two noise connected with our signal
+
+%%%slide5 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Channel Model (Cont')}
+  \end{center}
+ \vspace{3mm}
+ \begin{equation*}
+   \vect{Y}_k={\b{\vect{H}_k}}x_k+{\b{\vect{Z}_k}}
+ \end{equation*}
+   \begin{itemize}
+   \item $\{\vect{Z}_k\}$ IID $\sim \NormalC{\vect{0}}{\sigma^2
+    \mat{I}_{\nr}}$
+      \item $\{\vect{H}_k\} \indep \{\vect{Z}_k\}$
+    \item $\{\vect{H}_k\}$: {\r{very general}}
+      \begin{itemize}
+      \item stationary, ergodic, finite energy: $\E{\|\vect{H}_k\|^2} < \infty$
+          \item with memory          
+\item {\b finite} differential entropy rate ({\b regular}): $h(\{\vect{H}_k\}) > -\infty$
+        \end{itemize} 
+        \item Power constraints: {\b average} or {\b peak} for power $\mathcal{E}$
+\end{itemize}
+\vs{2}
+\end{slide}
+% H is general, ergodic (without this, we cannot compute capacity)
+% Memory: current rely on the past
+% h(H)>-infty: strength of the memory, keep certain randomness, so even if we have infinite
+% past, we cannot predict the whole channel in the future
+% Why h(H)>-infty? there are two (regular and nonregular), both are
+% decent assumption, we focus on the regular one
+% capacity is a function of E and we are interested in E to infinity
+%% We have specify the setup, now we will review the previous result;
+
+%%%slide6 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Asymptotic Capacity {\b{without}} Feedback}
+  \end{center}
+ \vspace{3mm}
+\begin{equation*}
+  \const{C}(\mathcal{E}) = \log(1+\log(1+\mathcal{E})) + {\b{\chi}}(\{\vect{H}_k\}) + o(1)
+\end{equation*}
+\begin{itemize}
+\item ${\b{\chi}}$: \emph{fading number} %importance of the fading number
+\end{itemize}
+\vs{2}
+\end{slide}
+% C is a function of power
+% C=... asymptotically
+% Has been shown before that loglog is extremely slow and is affected by fading process
+% \chi: not depend on power but on H's assumption
+%% loglog only depend on power, not on N_R, {H}
+%% loglog is very bad, so we want to know the threshold
+%% what we are really interested is fading
+
+%%%slide7
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Fading Number}
+  \end{center}
+ \vspace{3mm}
+ \begin{figure}[htbp]
+    \centering
+ \psfrag{log-regime}{log-regime}
+ \psfrag{loglog-regime}{loglog-regime}
+ \psfrag{threshold}{threshold} 
+\psfrag{SNR}{SNR}
+ \psfrag{f}{$\chi$}
+ \psfrag{C}{$\const{C}$}
+\psfrag{o}{$o(1)$}
+\psfrag{d}{dominating}
+\psfrag{x}{$\chi$}
+\psfrag{s}{$\log(1+\log(1+\textnormal{SNR}))$}
+ \includegraphics[width=0.8\textwidth]{fadingNumber.eps}
+    \caption{Capacity of a typical regular fading channel}
+    \label{fig:fadingNumber}
+  \end{figure}
+\vs{2}
+\end{slide}
+% for knowing threshold, we need to know the asyptotic capacity
+% o(1) is already is near the threshold, and loglog is not big yet
+% Importance of fading number
+% Low: normal log; high: extremely slow, emphasize by example
+% Threshold: sensitive to assumption, so x-axis to y-axis
+% Three region: low, threshold, high
+%% real math form of the fading number
+
+%%%slide8 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Fading Number {\b{without}}
+      Feedback} 
+  \end{center}
+ \vspace{3mm}
+
+\begin{equation*}
+  \const{C}(\mathcal{E}) = \log(1+\log(1+\mathcal{E})) + {\b{\chi}}(\{\vect{H}_k\}) + o(1)
+\end{equation*}
+\g
+\begin{itemize}
+\item $\chi$: \emph{fading number} %importance of the fading number
+\begin{IEEEeqnarray*}{rCl}
+  \chi(\{\vect{H}_k\}) 
+  & = & h_{\lambda}\left( \hvect{H}_0 e^{\ii\Theta_0}
+    \middle| \big\{\hvect{H}_{\ell} 
+    e^{\ii\Theta_{\ell}}\big\}_{\ell=-\infty}^{-1} \right) 
+  - \log 2 \nonumber\\
+  && +\: \nr \E{\log \|\vect{H}_0\|^2} - h\left( \vect{H}_0 \middle|
+    \vect{H}_{-\infty}^{-1} \right)
+\end{IEEEeqnarray*}
+\begin{itemize}
+\item $\{\Theta_k\}$ IID $\sim\Uniform{(-\pi, \pi]}$, $\indep \{\vect{H}_k\}$
+\item $\hvect{H}_k \eqdef \frac{\vect{H}_k}{\|\vect{H}_k\|}$
+\item $h_{\lambda}(\hvect{V}) \eqdef \Em{\big}{{-}{\log
+    p_{\hvect{V}}^{\lambda}(\hvect{V})}}$ 
+\end{itemize}
+\end{itemize}
+%\end{overlay}
+\vs{2}
+\end{slide}
+% \chi: a constant, depends only of {H_k}; E[]; h[]; H_hat
+% \Theta: it turns out that it is optimal by choosing it to be
+% circularly symmetric because it can be put most information
+% H_hat: diretion. we try to find the mag, direc., phase. for input,
+% we choose mag(power) to be infinite and phase to be circularly symmetric
+% h_\lambda: entropy rate for a unit vector
+% Memory with feedback usually increase capacity
+%% Comes to our main result, feedback should help: bra bra bra
+%% bad news is 
+
+
+%%%slide7 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Fading Number {\b{without}}
+      Feedback} 
+  \end{center}
+ \vspace{3mm}
+\g
+\begin{equation*}
+  \const{C}(\mathcal{E}) = \log(1+\log(1+\mathcal{E})) + \chi(\{\vect{H}_k\}) + o(1)
+\end{equation*}
+\k
+\begin{itemize}
+\item ${\b{\chi}}$: \emph{fading number} %importance of the fading number
+\begin{IEEEeqnarray*}{rCl}
+  {\b{\chi}}(\{\vect{H}_k\}) 
+  & = & h_{\lambda}\left( \hvect{H}_0 e^{\ii\Theta_0}
+    \middle| \big\{\hvect{H}_{\ell} 
+    e^{\ii\Theta_{\ell}}\big\}_{\ell=-\infty}^{-1} \right) 
+  - \log 2 \nonumber\\
+  && +\: \nr \E{\log \|\vect{H}_0\|^2} - h\left( \vect{H}_0 \middle|
+    \vect{H}_{-\infty}^{-1} \right)
+\end{IEEEeqnarray*}
+\begin{itemize}
+\item $\{\Theta_k\}$ IID $\sim\Uniform{(-\pi, \pi]}$, $\indep \{\vect{H}_k\}$
+\item $\hvect{H}_k \eqdef \frac{\vect{H}_k}{\|\vect{H}_k\|}$
+\item $h_{\lambda}(\hvect{V}) \eqdef \Em{\big}{{-}{\log
+    p_{\hvect{V}}^{\lambda}(\hvect{V})}}$ 
+\end{itemize}
+\end{itemize}
+%\end{overlay}
+\vs{2}
+\end{slide}
+
+
+%%%slide7 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Asymptotic Capacity {\b{with}} Feedback}
+  \end{center}
+ \vspace{3mm}
+\begin{whiteboxtheorem}%[SIMO Fading Number with Feedback]
+  \label{thm:feedbackfadingnumber}
+  \begin{equation*}
+     \const{C}_{\textnormal{FB}}(\mathcal{E}) 
+     = \log(1+\log(1+\mathcal{E})) + \chi_{\textnormal{FB}}(\{\vect{H}_k\}) + o(1)
+  \end{equation*}
+
+  \vspace{-2.5mm}
+\end{whiteboxtheorem}
+\vs{2}
+\end{slide}
+  % Let a general SIMO fading channel with memory be defined as in
+  % \eqref{eq:2} and consider a noiseless causal feedback link as
+  % described in \eqref{eq:6} (see Figure~\ref{fig:fig1}). Then the
+  % asymptotic channel capacity under either an average-power constraint
+  % \eqref{eq:av} or a peak-power constraint \eqref{eq:pp} is identical
+  % to the asymptotic channel capacity for the channel without feedback:
+% the asymptotic capacity grows double-logarithmically in the
+% power and that the second term in the asymptotic expansion, the
+% \emph{fading number}, is unchanged with respect to the same channel
+% without feedback.
+% first term loglog does not change
+
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Fading Number {\b{with}} Feedback}
+  \end{center}
+ \vspace{3mm}
+\begin{whiteboxtheorem}%[SIMO Fading Number with Feedback]
+  \label{thm:feedbackfadingnumber}
+ The fading number is 
+  \begin{IEEEeqnarray*}{rCl}
+    \chi_{\textnormal{FB}}(\{\vect{H}_k\}) & = & \chi(\{\vect{H}_k\})
+    \\
+    & = & h_{\lambda}\left( \hvect{H}_0 e^{\ii\Theta_0} \middle|
+      \big\{\hvect{H}_{\ell}
+      e^{\ii\Theta_{\ell}}\big\}_{\ell=-\infty}^{-1} \right)
+    - \log 2  \nonumber\\
+    && +\: \nr \E{\log \|\vect{H}_0\|^2} - h\left( \vect{H}_0 \middle|
+      \vect{H}_{-\infty}^{-1} \right)
+  \end{IEEEeqnarray*}
+
+  \vspace{-2.5mm}
+\end{whiteboxtheorem}
+\begin{overlay}{1}
+   \begin{itemize}
+   \item
+     {\b{$\const{C}_{\textnormal{FB}}(\mathcal{E})=\const{C}(\mathcal{E})$}} asymptotically
+\item Feedback is noisefree
+\end{itemize}
+\vs{2}
+\end{overlay}
+\end{slide}
+% Feedback suppose to help
+% even if feedback is noisefree, two capacity is still the same
+% any realistic feedback has this result
+% Noiseless is upperbound (even our assumption is unrealistic, but it
+% contains realistic situation)
+
+%%%slide10 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Intuition behind the Result}
+  \end{center}
+ \vspace{3mm}
+ \begin{itemize}
+ \item Feedback helps: past $\{\vect{H}_k\}$ known
+   \item Problem: $h(\{\vect{H}_k\}) > -\infty$
+%even with feedback, still noncoherent
+     \item Improve the power allocation \\
+For ${\r \beta} > 0$ :
+\begin{IEEEeqnarray*}{rCl}
+  \IEEEeqnarraymulticol{3}{l}{
+    \varlimsup_{\mathcal{E}\uparrow\infty} \{\log\log{{\r\beta}}\mathcal{E} - \log\log\mathcal{E} \}
+  }\nonumber\\\quad
+  & = & \varlimsup_{\mathcal{E}\uparrow\infty} \{ \log(\log{\r{\beta}} + \log\mathcal{E}) -
+  \log\log\mathcal{E} \}
+  \\
+  & = & \varlimsup_{\mathcal{E}\uparrow\infty} \{ \log(\log\mathcal{E}) -
+  \log\log\mathcal{E} \} 
+  \\
+  & = & 0 
+\end{IEEEeqnarray*}
+\end{itemize}
+\vs{2}
+\end{slide}
+
+
+%%%slide10 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: Challenges}
+  \end{center}
+ \vspace{3mm}
+   \begin{itemize}
+     \item $\{\vect{H}_k\}$: very general
+   \item $\because$ Feedback $\Rightarrow$ input, fading, and noise are
+     dependent
+   \item $\because$ Feedback $\Rightarrow$ input is nonstationary
+   \end{itemize}
+\vs{2}
+\end{slide}
+% Before, we proved that stationary input can achieve capacity
+%% Proof is long, only show some concepts
+
+
+%%%slide10 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: Outline}
+  \end{center}
+ \vspace{3mm}
+
+  \begin{IEEEeqnarray*}{rCl}
+ \const{C}=\lim_{n\to \infty} \frac{1}{n} \sup_{Q\in \set{P}(\set{X}^n)} I(X_1^n;Y_1^n)   
+  \end{IEEEeqnarray*}
+\begin{itemize}
+ \item $\const{C}(\mathcal{E})\le\const{C}_{{\b\textnormal{FB}}}(\mathcal{E})$  
+ \end{itemize}
+
+
+\vs{2}
+\end{slide}
+
+
+%%%slide10 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: Outline (Cont')}
+  \end{center}
+ \vspace{3mm}
+
+\begin{itemize}
+\item By Fano's
+\begin{IEEEeqnarray*}{rCl}
+  \const{R}_{\textnormal{FB}}(\mathcal{E}) 
+  & \le & {\b \frac{1}{n} I\big(M;\vect{Y}_1^n\big) }
+  + \frac{\log 2}{n} + P_{\textnormal{e}}^{(n)}\const{R}_{\textnormal{FB}}(\mathcal{E}) 
+  + \frac{\eps_n}{n}
+\end{IEEEeqnarray*} 
+where $P_{\textnormal{e}}^{(n)}$: error probability
+\item 
+ \begin{IEEEeqnarray*}{rCl}
+\frac{1}{n} I\big(M;\vect{Y}_1^n\big)
+&=& \frac{1}{n}\sum_{k=1}^n I\big(M; \vect{Y}_k \big|
+  \vect{Y}_1^{k-1} \big)\\
+& = &\frac{1}{n}\sum_{k={\r{1}}}^{{\r{\kappa}}} I\big(M; \vect{Y}_k
+  \big|\vect{Y}_1^{k-1} \big) 
+  + \frac{1}{n}\sum_{k={\r{\kappa+1}}}^{{\r{n}}} {\b{I\big(M;
+  \vect{Y}_k \big|\vect{Y}_1^{k-1} \big)}}    
+  \end{IEEEeqnarray*}
+\end{itemize}
+
+\vs{2}
+\end{slide}
+% we only need to find upper bound because lower bound is just
+% capacity without feedback
+% average power constraint is upper bound, so if average is proved, peak is
+% also proved
+% transient phase in Markov (have certain H)  v.s. kind of steady phase 
+% Lower bound is equal to C_IID, we do not need to find it.
+
+%%%slide10 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: Outline (Cont')}
+  \end{center}
+ \vspace{3mm}
+\begin{IEEEeqnarray*}{rCl}
+ % \IEEEeqnarraymulticol{3}{l}{
+    {\b{I\big(M;\vect{Y}_k \big|\vect{Y}_1^{k-1} \big)}}
+%  }\nonumber\\\quad
+  & \le &
+  I(X_k; \vect{Y}_k) + I\big(\vect{H}_1^{k-1}; \vect{Y}_k \big|
+  X_k \big)  - I\big(\vect{Y}_1^{k-1}; \vect{Y}_k \big)  
+\end{IEEEeqnarray*}
+\begin{overlay}{1}
+\begin{itemize}
+\item How to compute $I(\vect{H}_1^{k-1}; \vect{Y}_k | X_k, \vect{H}_k)$?
+\end{itemize}
+\end{overlay}
+\vs{2}
+\end{slide}
+% three terms remain by using deleting, conditioning, chain rule, some
+% normal tricks
+% 1. memoryless 2. memory 3. correction about H
+% if there is no feedback, this term is zero for certain. but now we
+% have feedback, we are not certain whether I( | X_k, H_k)
+% is zero?
+% I( | X_k, H_k) is the term being deleted.
+
+
+%%%slide11 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+\begin{itemize}
+\item Ordered list:  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\g
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\item $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\end{itemize}
+\vs{2}
+\end{slide}
+% explain the list
+% right order
+% ordered list is "casaully created (generated)!"
+
+%%%slide11 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+\begin{itemize}
+\g
+\item Ordered list:  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\k
+\item
+  $({\r M,H_1,...,H_k,Z_1,...,Z_k,}F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\g
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\item $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\end{itemize}
+\vs{2}
+\end{slide}
+
+%%%slide11 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+\begin{itemize}
+\g
+\item Ordered list:  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\k
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,{\r F_1,X_1,Y_1,}F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\g
+\item $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\end{itemize}
+\vs{2}
+\end{slide}
+
+%%%slide11 
+\begin{slide}\addtocounter{slide}{-1}
+\k
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+\begin{itemize}
+\g
+\item Ordered list:  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\item
+  $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+\k
+\item $(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,{\r F_2,X_2,Y_2,}...,F_k,X_k,Y_k)$
+\end{itemize}
+\vs{2}
+\end{slide}
+
+
+
+%%%slide11 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+ %\begin{itemize}
+$({\r M,H_1,...,H_k,Z_1,...,Z_k,}F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+%\end{itemize}
+%\begin{overlay}{1}
+\begin{figure*}[t]
+  \centering
+  \psfrag{X1}{$X_1$}
+\psfrag{X2}{$X_2$}
+\psfrag{X3}{$X_3$}
+\psfrag{Xk1}{\scriptsize{$X_{k-1}$}}
+\psfrag{Xk}{$X_k$}
+
+\psfrag{F1}{$\vect{F}_1$}
+\psfrag{F2}{$\vect{F}_2$}
+\psfrag{F3}{$\vect{F}_3$}
+\psfrag{Fk1}{\scriptsize{$\vect{F}_{k-1}$}}
+\psfrag{Fk}{$\vect{F}_k$}
+
+\psfrag{Z1}{$\vect{Z}_1$}
+\psfrag{Z2}{$\vect{Z}_2$}
+\psfrag{Z3}{$\vect{Z}_3$}
+\psfrag{Zk1}{$\vect{Z}_{k-1}$}
+\psfrag{Zk}{$\vect{Z}_k$}
+
+\psfrag{Y1}{$\vect{Y}_1$}
+\psfrag{Y2}{$\vect{Y}_2$}
+\psfrag{Y3}{$\vect{Y}_3$}
+\psfrag{Yk1}{\scriptsize{$\vect{Y}_{k-1}$}}
+\psfrag{Yk}{$\vect{Y}_k$}
+
+\psfrag{H1}{$\vect{H}_1$}
+\psfrag{H2}{$\vect{H}_2$}
+\psfrag{H3}{$\vect{H}_3$}
+\psfrag{Hk1}{$\vect{H}_{k-1}$}
+\psfrag{Hk}{$\vect{H}_k$}
+
+\psfrag{M}{$M$}
+  \includegraphics[width=1.0\textwidth]{V3.eps}
+  \caption{The causality graph}
+  \label{fig:fig2}
+\end{figure*}
+\vs{2}
+%\end{overlay}
+\end{slide}
+
+
+
+%%%slide11 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+ %\begin{itemize}
+ $(M,H_1,...,H_k,Z_1,...,Z_k,{\r F_1,X_1,Y_1,}F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+%\end{itemize}
+%\begin{overlay}{1}
+\begin{figure*}[t]
+  \centering
+  \psfrag{X1}{$X_1$}
+\psfrag{X2}{$X_2$}
+\psfrag{X3}{$X_3$}
+\psfrag{Xk1}{\scriptsize{$X_{k-1}$}}
+\psfrag{Xk}{$X_k$}
+
+\psfrag{F1}{$\vect{F}_1$}
+\psfrag{F2}{$\vect{F}_2$}
+\psfrag{F3}{$\vect{F}_3$}
+\psfrag{Fk1}{\scriptsize{$\vect{F}_{k-1}$}}
+\psfrag{Fk}{$\vect{F}_k$}
+
+\psfrag{Z1}{$\vect{Z}_1$}
+\psfrag{Z2}{$\vect{Z}_2$}
+\psfrag{Z3}{$\vect{Z}_3$}
+\psfrag{Zk1}{$\vect{Z}_{k-1}$}
+\psfrag{Zk}{$\vect{Z}_k$}
+
+\psfrag{Y1}{$\vect{Y}_1$}
+\psfrag{Y2}{$\vect{Y}_2$}
+\psfrag{Y3}{$\vect{Y}_3$}
+\psfrag{Yk1}{\scriptsize{$\vect{Y}_{k-1}$}}
+\psfrag{Yk}{$\vect{Y}_k$}
+
+\psfrag{H1}{$\vect{H}_1$}
+\psfrag{H2}{$\vect{H}_2$}
+\psfrag{H3}{$\vect{H}_3$}
+\psfrag{Hk1}{$\vect{H}_{k-1}$}
+\psfrag{Hk}{$\vect{H}_k$}
+
+\psfrag{M}{$M$}
+  \includegraphics[width=1.0\textwidth]{V2.eps}
+  \caption{The causality graph}
+  \label{fig:fig2}
+\end{figure*}
+\vs{2}
+%\end{overlay}
+\end{slide}
+
+
+%%%slide11 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+ %\begin{itemize}
+$(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,{\r F_2,X_2,Y_2,}...,F_k,X_k,Y_k)$
+%\end{itemize}
+%\begin{overlay}{1}
+\begin{figure*}[t]
+  \centering
+  \psfrag{X1}{$X_1$}
+\psfrag{X2}{$X_2$}
+\psfrag{X3}{$X_3$}
+\psfrag{Xk1}{\scriptsize{$X_{k-1}$}}
+\psfrag{Xk}{$X_k$}
+
+\psfrag{F1}{$\vect{F}_1$}
+\psfrag{F2}{$\vect{F}_2$}
+\psfrag{F3}{$\vect{F}_3$}
+\psfrag{Fk1}{\scriptsize{$\vect{F}_{k-1}$}}
+\psfrag{Fk}{$\vect{F}_k$}
+
+\psfrag{Z1}{$\vect{Z}_1$}
+\psfrag{Z2}{$\vect{Z}_2$}
+\psfrag{Z3}{$\vect{Z}_3$}
+\psfrag{Zk1}{$\vect{Z}_{k-1}$}
+\psfrag{Zk}{$\vect{Z}_k$}
+
+\psfrag{Y1}{$\vect{Y}_1$}
+\psfrag{Y2}{$\vect{Y}_2$}
+\psfrag{Y3}{$\vect{Y}_3$}
+\psfrag{Yk1}{\scriptsize{$\vect{Y}_{k-1}$}}
+\psfrag{Yk}{$\vect{Y}_k$}
+
+\psfrag{H1}{$\vect{H}_1$}
+\psfrag{H2}{$\vect{H}_2$}
+\psfrag{H3}{$\vect{H}_3$}
+\psfrag{Hk1}{$\vect{H}_{k-1}$}
+\psfrag{Hk}{$\vect{H}_k$}
+
+\psfrag{M}{$M$}
+  \includegraphics[width=1.0\textwidth]{V1.eps}
+  \caption{The causality graph}
+  \label{fig:fig2}
+\end{figure*}
+\vs{2}
+%\end{overlay}
+\end{slide}
+
+
+%%%slide11 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Causal Interpretation}
+  \end{center}
+ \vspace{3mm}
+% \begin{itemize}
+$(M,H_1,...,H_k,Z_1,...,Z_k,F_1,X_1,Y_1,F_2,X_2,Y_2,...,F_k,X_k,Y_k)$
+%\end{itemize}
+%\begin{overlay}{1}
+\begin{figure*}[t]
+  \centering
+  \psfrag{X1}{$X_1$}
+\psfrag{X2}{$X_2$}
+\psfrag{X3}{$X_3$}
+\psfrag{Xk1}{\scriptsize{$X_{k-1}$}}
+\psfrag{Xk}{$X_k$}
+
+\psfrag{F1}{$\vect{F}_1$}
+\psfrag{F2}{$\vect{F}_2$}
+\psfrag{F3}{$\vect{F}_3$}
+\psfrag{Fk1}{\scriptsize{$\vect{F}_{k-1}$}}
+\psfrag{Fk}{$\vect{F}_k$}
+
+\psfrag{Z1}{$\vect{Z}_1$}
+\psfrag{Z2}{$\vect{Z}_2$}
+\psfrag{Z3}{$\vect{Z}_3$}
+\psfrag{Zk1}{$\vect{Z}_{k-1}$}
+\psfrag{Zk}{$\vect{Z}_k$}
+
+\psfrag{Y1}{$\vect{Y}_1$}
+\psfrag{Y2}{$\vect{Y}_2$}
+\psfrag{Y3}{$\vect{Y}_3$}
+\psfrag{Yk1}{\scriptsize{$\vect{Y}_{k-1}$}}
+\psfrag{Yk}{$\vect{Y}_k$}
+
+\psfrag{H1}{$\vect{H}_1$}
+\psfrag{H2}{$\vect{H}_2$}
+\psfrag{H3}{$\vect{H}_3$}
+\psfrag{Hk1}{$\vect{H}_{k-1}$}
+\psfrag{Hk}{$\vect{H}_k$}
+
+\psfrag{M}{$M$}
+  \includegraphics[width=1.0\textwidth]{V.eps}
+  \caption{The causality graph of our model}
+  \label{fig:fig2}
+\end{figure*}
+\vs{2}
+%\end{overlay}
+\end{slide}
+
+
+
+%%%slide12
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Causal Interpretation: Example}
+  \end{center}
+ \vspace{3mm}
+
+How to compute $I(\vect{H}_1^{k-1}; \vect{Y}_k | X_k, \vect{H}_k)$?
+\begin{overlay}{1}
+\begin{figure*}[t]
+  \centering
+     \psfrag{X1}{$X_1$}
+\psfrag{X2}{$X_2$}
+\psfrag{X3}{$X_3$}
+\psfrag{Xk1}{$X_{k-1}$}
+\psfrag{Xk}{${\r{X_k}}$}
+
+\psfrag{F1}{$\vect{F}_1$}
+\psfrag{F2}{$\vect{F}_2$}
+\psfrag{F3}{$\vect{F}_3$}
+\psfrag{Fk1}{$\vect{F}_{k-1}$}
+\psfrag{Fk}{$\vect{F}_k$}
+
+\psfrag{Z1}{$\vect{Z}_1$}
+\psfrag{Z2}{$\vect{Z}_2$}
+\psfrag{Z3}{$\vect{Z}_3$}
+\psfrag{Zk1}{$\vect{Z}_{k-1}$}
+\psfrag{Zk}{$\vect{Z}_k$}
+
+\psfrag{Y1}{$\vect{Y}_1$}
+\psfrag{Y2}{$\vect{Y}_2$}
+\psfrag{Y3}{$\vect{Y}_3$}
+\psfrag{Yk1}{$\vect{Y}_{k-1}$}
+\psfrag{Yk}{${\b{\vect{Y}_k}}$}
+
+\psfrag{H1}{${\b{\vect{H}_1}}$}
+\psfrag{H2}{${\b{\vect{H}_2}}$}
+\psfrag{H3}{${\b{\vect{H}_3}}$}
+\psfrag{Hk1}{${\b{\vect{H}_{k-1}}}$}
+\psfrag{Hk}{${\r{\vect{H}_k}}$}
+
+\psfrag{M}{$M$}
+  \includegraphics[width=1.0\textwidth]{HY.eps}
+  \caption{${\b{\vect{H}_1^{k-1}}} \indep {\b{\vect{Y}_k}}$ when
+   conditioned on $({\r{X_k}},{\r{\vect{H}_k}})$}
+  \label{fig:fig5}
+\end{figure*}
+\end{overlay}
+
+% \begin{figure}[htbp]
+%   \centering
+% \psfrag{X1}{$X_1$}
+% \psfrag{X2}{$X_2$}
+% \psfrag{X3}{$X_3$}
+% \psfrag{X4}{$X_4$}
+% \psfrag{X5}{$X_5$}
+% \psfrag{X6}{$X_6$}
+%    \includegraphics[width=0.3\textwidth]{f1.eps}
+%   \caption{Toy example}
+%   \label{fig:1}
+% \end{figure}
+
+% \begin{figure}[htbp]
+%   \centering
+% \psfrag{X1}{$X_1$}
+% \psfrag{X2}{$X_2$}
+% \psfrag{X3}{$X_3$}
+% \psfrag{X4}{$X_4$}
+% \psfrag{X5}{$X_5$}
+%    \includegraphics[width=0.2\textwidth]{f3.eps}
+%   \caption{$X_4 \indep X_5$ if conditioned on $X_2$}
+%   \label{fig:1}
+% \end{figure}
+
+\vs{2}
+\end{slide}
+
+%%%slide17 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: Escape to Infinity}
+  \end{center}
+ \vspace{3mm}
+\begin{IEEEeqnarray*}{rCl}
+ % \IEEEeqnarraymulticol{3}{l}{
+    {\b{I\big(M;\vect{Y}_k \big|\vect{Y}_1^{k-1} \big)}}
+%  }\nonumber\quad
+  & \le &
+  I(X_k; \vect{Y}_k) + I\big(\vect{H}_1^{k-1}; \vect{Y}_k \big|
+  X_k \big)  - I\big(\vect{Y}_1^{k-1}; \vect{Y}_k \big)  
+\end{IEEEeqnarray*}
+\begin{itemize}
+\item Case 1: $ |X_k| \ge \xi_{\textnormal{min}}$ \\
+Case 2: $ |X_k| \le \xi_{\textnormal{min}}$
+\end{itemize}
+\vs{2}
+\end{slide}
+% without feedback, with feedback, it turns out it is true as well
+% why this two cases? escape to infinity business; \beta=1
+% we implicitly proved that Pr(X_k > \xi_min)=1
+
+
+%%%slide18 
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Proof: $\E{\|\vect{H}_k\|^2|X_k|^2}$}
+  \end{center}
+ \vspace{3mm}
+ \begin{itemize}
+ \item $\E{\|\vect{H}_k\|^2|X_k|^2}=\E{\|\vect{H}_k\|^2}\E{|X_k|^2}$\
+   \item Case 1: $\|\vect{H}_k\|^2 \ge t$\\
+Case 2:  $\|\vect{H}_k\|^2 < t$
+\item By Markov inequality:
+\begin{equation*}
+  \label{eq:21}
+  {\b{\Prv{\|\vect{H}_k\|^2\ge t}\le\frac{\E{\|\vect{H}_k\|^2}}{t}}}
+\end{equation*}
+\end{itemize}
+\vs{2}
+\end{slide}
+% A is independent of B
+% be independent "of" each other
+% choose t depend on E, as E goes to infinity, the Pr{>t} will be
+% bounded by zero, so case one disapear.
+
+%%%slide13
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Summary}
+  \end{center}
+\vspace{3mm}
+\begin{itemize}
+\item
+  ${\b{\const{C}_{\textnormal{FB}}(\mathcal{E})}}=\const{C}(\mathcal{E})$
+  asymptotically
+% lower bound and upper bound
+\item $\{\vect{H}_k\}$ and feedback are general 
+\item $\because$ Feedback is noiseless $\Rightarrow$ the best we can get
+%Because $C_{FB}=C$ and we assume feedback is noiseless, it is the best
+%  that we can get in high SNR
+\item How about MISO?
+\end{itemize} 
+\vs{2}
+\end{slide}
+% MISO: not only mag, phase (circularly), but optimal direction?
+
+%%%slide14
+\begin{slide}
+  \begin{center}
+    \textbf{\Large Thank you :-)}
+  \end{center}
+\end{slide}
+
+\end{document}
