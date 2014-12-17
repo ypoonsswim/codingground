@@ -31,9 +31,9 @@ void print(Number* curr)
         }
 }
 
-void deletenode(Number*tt, int value)
+void deletenode(Number*tt, int value) // delete node except for the first node
 {
-    Number* curr;
+    Number* curr=tt;
     while((tt->data != value) && tt)
     {
         curr=tt;
@@ -42,20 +42,20 @@ void deletenode(Number*tt, int value)
     
     if(tt)
     {
-        curr=tt->nextaddr;
+        curr->nextaddr=tt->nextaddr;
     }
 }
 
 int main ()
 {
-   Number test;
-   test.data=8;
-   test.nextaddr=NULL;
-   addAfter(&test,10);
-   addAfter(&test,5);
-   addAfter(&test,20);
-   print(&test);
-   deletenode(&test,0);
-   print(&test);
+   Number* head = new Number;
+   head->data=8;
+   head->nextaddr=NULL;
+   addAfter(head,10);
+   addAfter(head,5);
+   addAfter(head,20);
+   print(head);
+   deletenode(head,10);
+   print(head);
    return 0;
 }
