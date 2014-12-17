@@ -7,6 +7,21 @@ struct Number
     Number* nextaddr;
 };
 
+/*void deletedata(Number*tt, int value)
+{
+    int i;
+    for(i=0;tt[i].data!=value;i++){}
+    tt[i-1].nextaddr=tt+(i+1);
+}
+*/
+void add(Number*tt, int value)
+{
+    Number* temp= new Number;
+    temp->data=value;
+    temp->nextaddr=NULL;
+    tt->nextaddr=temp;
+}
+
 void print(Number* tt)
 {
       Number* curr=tt;
@@ -17,28 +32,13 @@ void print(Number* tt)
         }
 }
 
-/*void deletedata(Number*tt, int value)
-{
-    int i;
-    for(i=0;tt[i].data!=value;i++){}
-    tt[i-1].nextaddr=tt+(i+1);
-}
-*/
-void add(Number*tt, int value)
-{
-    Number temp;
-    temp.data=value;
-    temp.nextaddr=NULL;
-    tt.nextaddr=temp;
-}
-
 int main ()
 {
    Number test;
    test.data=8;
    test.nextaddr=NULL;
-   add(test,10);
-   print(test);
+   add(&test,10);
+   print(&test);
    //deletedata(test,3);
    //print(test);
    return 0;
