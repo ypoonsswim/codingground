@@ -10,7 +10,6 @@ struct Tree
 
 void addTree(Tree* curr, int value)
 {
-    cout<<curr->data<<endl;
     if(curr->data > value)
     {
         if(curr->llink)
@@ -20,7 +19,6 @@ void addTree(Tree* curr, int value)
     }
     else
     {
-        cout<<"test"<<endl;
         if(curr->rlink)
             addTree(curr->rlink, value);
         else
@@ -32,13 +30,11 @@ void addTree(Tree* curr, int value)
 
 int main()
 {
-   Tree* pine;
+   Tree* pine = new Tree;
    pine->data=10;
    pine->llink=NULL;
    pine->rlink=NULL;
    addTree(pine,20);
-   cout << pine->data  << endl; 
    
    return 0;
 }
-
