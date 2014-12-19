@@ -41,6 +41,21 @@ void print(Tree* curr)
         print(curr->rlink);
 }
 
+Tree* copyTree(Tree* curr)
+{
+    if(curr == NULL)
+        Tree* treecopy= NULL;
+    else
+    {
+        Tree* treecopy= new Tree;
+        treecopy->data=curr->data;
+        copyTree(treecopy->llink);
+        copyTree(treecopy->rlink);
+    }
+    
+    return treecopy;
+}
+
 int main()
 {
    Tree* pine = new Tree;
@@ -53,5 +68,7 @@ int main()
    addTree(pine,5);
    addTree(pine,9);
    print(pine);
+   Tree* pine2=copyTree(pine);
+   print(pine2);
    return 0;
 }
