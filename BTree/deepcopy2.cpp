@@ -41,16 +41,11 @@ void print(Tree* curr)
         print(curr->rlink);
 }
 
-void copytree(Tree* curr, Tree* treecopy)
-    {
-            
-    }
-
 Tree* deepcopy(Tree* curr)
 {
     Tree* treecopy;
     if(curr == NULL)
-            treecopy= NULL;
+            treecopy = NULL;
     else
     {
         treecopy= new Tree;
