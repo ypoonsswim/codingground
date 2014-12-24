@@ -1,1 +1,1 @@
-This is a place to practice my C/C++ programming skill.
+This is a place to record my practice in C/C++ programming.
