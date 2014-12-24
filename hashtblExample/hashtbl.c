@@ -136,6 +136,7 @@ void *hashtbl_get(HASHTBL *hashtbl, const char *key)
 
 	return NULL;
 }
+
 int hashtbl_resize(HASHTBL *hashtbl, hash_size size)
 {
 	HASHTBL newtbl;
