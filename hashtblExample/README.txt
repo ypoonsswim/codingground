@@ -1,1 +1,1 @@
-This is an hash table example from the internet.
+This is a hash table example from the internet.
