@@ -73,7 +73,7 @@ int main()
 	spain=hashtbl_get(hashtbl, "Spain");
 	printf("Spain: %s\n", spain?spain:"-");
 
-  hashtbl_resize(hashtbl, 8);
+  	hashtbl_resize(hashtbl, 8);
 
 	printf("After resize:\n");
 	italy=hashtbl_get(hashtbl, "Italy");
