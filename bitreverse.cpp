@@ -5,7 +5,7 @@ using namespace std;
  
 void bitreverse(int* a, int position)
 {
-    *a=2^position xor *a  ;
+    *a=(2^positi)xor *a  ;       /////////////////////////// problem
 }
 
 int main ()
