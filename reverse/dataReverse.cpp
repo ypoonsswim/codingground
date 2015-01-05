@@ -1,3 +1,6 @@
+// reverse all the bits in the data
+// not yet finished
+
 #include <iostream>
 #include <math.h>    
 using namespace std;
