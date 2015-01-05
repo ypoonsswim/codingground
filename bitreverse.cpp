@@ -1,4 +1,4 @@
-// I am writing a funtion that can reverse the bit in the data.
+// I am writing a funtion that can reverse one bit in the data.
 
 #include <iostream>
 #include <math.h>    
