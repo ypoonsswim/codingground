@@ -1,20 +1,19 @@
 // I am writing a funtion that can reverse the bit in the data.
 
 #include <iostream>
+#include <math.h>    
 using namespace std;
  
 void bitreverse(int* a, int position)
 {
-    *a=(2^positi)xor *a  ;       /////////////////////////// problem
+    int c=pow(2,position);
+    *a= c xor *a;
 }
 
 int main ()
 {
    int b=5;
-   int* a;
-   a=&b;
-   bitreverse(a,0);
-   cout<< *a <<endl;
-   
+   bitreverse(&b,1);
+   cout<< b << endl;
    return 0;
 }
